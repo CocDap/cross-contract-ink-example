@@ -3,8 +3,6 @@
 #[ink::contract]
 mod flipper {
 
-    use other_flipper::OtherFlipperRef;
-    use ink::codegen::TraitCallBuilder;
     // import trait 
     use other_flipper::OtherFlip;
 
@@ -25,12 +23,12 @@ mod flipper {
 
         #[ink(message)]
         pub fn cross_flip(&mut self){
-            todo!()
+            self.other_flipper.flip();
         }
 
         #[ink(message)]
         pub fn cross_get(&self) -> bool{
-            todo!()
+            self.other_flipper.get()
         }
     }
 }
