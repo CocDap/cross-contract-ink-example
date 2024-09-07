@@ -6,6 +6,10 @@ edition = "2021"
 
 [dependencies]
 ink = { workspace = true }
+# Note: We **need** to specify the `ink-as-dependency` feature.
+#
+# If we don't we will end up with linking errors!
+other_flipper = { path = "../other_flipper", default-features = false, features = ["ink-as-dependency"] }
 
 [dev-dependencies]
 ink_e2e = { workspace = true }
@@ -17,6 +21,9 @@ path = "lib.rs"
 default = ["std"]
 std = [
     "ink/std",
+    # Note: The metadata generation step requires `std`. If we don't specify this the metadata
+    # generation for our contract will fail!
+    "other_flipper/std",
 ]
 ink-as-dependency = []
 e2e-tests = []
