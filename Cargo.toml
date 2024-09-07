@@ -1,5 +1,5 @@
 [workspace]
-members = ["flipper"]
+members = ["flipper","other_flipper"]
 exclude = [".cargo", "target"]
 resolver = "2"
 
