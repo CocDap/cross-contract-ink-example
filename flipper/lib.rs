@@ -4,6 +4,7 @@
 mod flipper {
 
     use other_flipper::OtherFlipperRef;
+    use ink::codegen::TraitCallBuilder;
 
     #[ink(storage)]
     pub struct Flipper {
@@ -25,18 +26,18 @@ mod flipper {
             Self { other_flipper }
         }
 
-        /// A message that can be called on instantiated contracts.
-        /// This one flips the value of the stored `bool` from `true`
-        /// to `false` and vice versa.
         #[ink(message)]
-        pub fn flip(&mut self) {
-            todo!()
+        pub fn cross_flip(&mut self){
+            let call_builder = self.other_flipper.call_mut();
+
+            call_builder.flip().call_v1().invoke();
         }
 
-        /// Simply returns the current value of our `bool`.
         #[ink(message)]
-        pub fn get(&self) -> bool {
-            todo!()
+        pub fn cross_get(&self) -> bool{
+            let call_builder = self.other_flipper.call();
+
+            call_builder.get().call_v1().invoke()
         }
     }
 }
